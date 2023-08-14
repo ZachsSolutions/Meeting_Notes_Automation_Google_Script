@@ -1,17 +1,55 @@
+function getMostRecentFile(folderid) {
+    var files = DriveApp.getFolderById(folderid).getFiles();
+    console.log(files);
+ var mostRecentFile;
+  var mostRecentTime = new Date(0);
+  while (files.hasNext()) {
+    var file = files.next();
+    if (file.getDateCreated() > mostRecentTime) {
+      mostRecentFile = file;
+      mostRecentTime = file.getDateCreated();
+    }
+  }
+    
+  return mostRecentFile;
+  console.log('1exwPWlbGq6dKTg20QXH5a8883KcA6Q4u')
+}
+
+
+
+
 function createSummaryDocument() {
   // Your GPT-3 API key and endpoint
-  var apiKey = "ENTER_API_KEY; //Your API Key goes Here
+  var apiKey = "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";
   var endpoint = "https://api.openai.com/v1/completions";
 
-  
-  var document = DocumentApp.openById('ENTER FOLDER NAME'); // This part needs to be updated to grab the most recent documents in a folder. Still to be done.
-  var documentname = DocumentApp.openById('ENTER DOC NAME').getName();
-  
+// get document
+
+var folderID = '1exwPWlbGq6dKTg20QXH5a8883KcA6Q4u';
+var document4= getMostRecentFile(folderID);
+var documentID = document4.getId();
+//console.log(documentname);
+  //var folderfiles = DriveApp.getfolderbyname('Meet Transcript');
+  var document = DocumentApp.openById(documentID);
+  var documentname = DocumentApp.openById(documentID).getName();
+// this next var is used in the trigger to determine if the document is done processing
+  var tenMinutesAgo = new Date(new Date().getTime() - 2 * 60 * 1000);
+  console.log(documentname);
+  console.log('checking the index of' + documentname.indexOf("Summarized") != -1);
+  console.log(tenMinutesAgo + 'ten minutes ago');
+  console.log(document4.getLastUpdated());
+  console.log('checking the date ' + document4.getLastUpdated() < tenMinutesAgo);
+
+if( documentname.indexOf("Summarized") == -1 || document4.getLastUpdated() > tenMinutesAgo){
+  return null
+}  
+else{ 
+  console.log(documentname);
   // Get the text body
-var textbody = document.getBody().getText(); 
+var textbody = document.getBody();
 
   // The transcript of the meeting
-  var transcript = '"'+'Can you please provide a summary of the following meetings transcripts into a two column table, with the headers subject, and points discussed: '+textbody+'"';
+  var transcript = '"'+'Can you please provide a summary of the following meetings transcripts into a 5 bullet point summary: '+textbody+'"';
   
   // Set up the request body
   var requestBody = {"model":"text-davinci-003",
@@ -67,11 +105,14 @@ var textbody = document.getBody().getText();
   // creating an email to send the body in
   var recipient ='zj.linehan@gmail.com';
   var subject ='Meeting minutes for today '+documentname ;
-  var body = '"'+'Hi,  Here are the points discussed for today...'+summary+'"';
+  var body ='Hi,  Here are the points discussed for today:'+summary+'"';
+
+document.setName(documentname + ' Summarized');  
 
 MailApp.sendEmail(recipient,subject,body)
   // Return the document's URL
   return doc.getUrl();
 
-  
+ 
+}
 }
