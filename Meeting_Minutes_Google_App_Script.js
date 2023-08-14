@@ -103,7 +103,7 @@ var textbody = document.getBody();
   
 
   // creating an email to send the body in
-  var recipient ='zj.linehan@gmail.com';
+  var recipient ='YOUR_EMAIL_HERE'; //enter the email that you want to receive the notifications here.  This can also be taken from the doc if necessary through Google Standard Methods.
   var subject ='Meeting minutes for today '+documentname ;
   var body ='Hi,  Here are the points discussed for today:'+summary+'"';
 
