@@ -22,4 +22,12 @@ Paste the Javascript into the file.  Update the Variables including API KEY and 
 **Post Installation Steps:**
 
 Create a trigger to run every minute.  The automation will only work once per document.
+
 <img width="380" alt="image" src="https://github.com/ZachsSolutions/Meeting_Notes_Automation_Google_Script/assets/52823904/8e2bbb45-f099-4e81-b66a-6e3dd4e8c022">
+
+
+**Success:**
+After these steps are completed you will receive the summary emails in your inbox after all Meets meetings!
+
+<img width="298" alt="image" src="https://github.com/ZachsSolutions/Meeting_Notes_Automation_Google_Script/assets/52823904/b64ab529-ad76-4e1d-85ca-16cbf6bd61b7">
+
