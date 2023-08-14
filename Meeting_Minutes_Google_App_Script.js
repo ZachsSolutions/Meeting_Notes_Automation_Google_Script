@@ -20,12 +20,12 @@ function getMostRecentFile(folderid) {
 
 function createSummaryDocument() {
   // Your GPT-3 API key and endpoint
-  var apiKey = "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";
+  var apiKey = "YOUR_API_KEY"; //enter your api key here
   var endpoint = "https://api.openai.com/v1/completions";
 
 // get document
 
-var folderID = '1exwPWlbGq6dKTg20QXH5a8883KcA6Q4u';
+var folderID = 'YOUR_FOLDER_ID'; // enter your google folder id
 var document4= getMostRecentFile(folderID);
 var documentID = document4.getId();
 //console.log(documentname);
